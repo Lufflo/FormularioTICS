@@ -8,7 +8,7 @@ document.getElementById('inscripcionForm').addEventListener('submit', function(e
         email: formData.get('email')
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbwILD1WEgoAKjZ8Pclfbz8U6UywNcLQqrth6twI7hZ_xg7Am47J1ruotMjszGiOwSnQtA/exec', {
+    fetch('https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbwILD1WEgoAKjZ8Pclfbz8U6UywNcLQqrth6twI7hZ_xg7Am47J1ruotMjszGiOwSnQtA/exec', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -20,7 +20,7 @@ document.getElementById('inscripcionForm').addEventListener('submit', function(e
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return response.text(); // Obtener texto crudo primero
+        return response.text();
     })
     .then(text => {
         console.log('Texto recibido:', text);
