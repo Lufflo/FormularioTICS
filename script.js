@@ -20,25 +20,24 @@ document.getElementById('inscripcionForm').addEventListener('submit', function(e
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return response.text();
+        return response.text(); // Obtener texto crudo primero
     })
     .then(text => {
         console.log('Texto recibido:', text);
+        let result;
         try {
-            const result = text ? JSON.parse(text) : { status: 'error', message: 'Respuesta vacía' };
-            console.log('Resultado parseado:', result);
-            if (result.status === 'success') {
-                document.getElementById('mensaje').textContent = '¡Inscripción enviada con éxito!';
-                document.getElementById('inscripcionForm').reset();
-            } else {
-                document.getElementById('mensaje').textContent = 'Error: ' + result.message;
-            }
+            result = text ? JSON.parse(text) : { status: 'error', message: 'Respuesta vacía del servidor' };
         } catch (e) {
-            document.getElementById('mensaje').textContent = 'Error al parsear: ' + e.message;
+            result = { status: 'error', message: 'Error al parsear JSON: ' + e.message };
+        }
+        console.log('Resultado parseado:', result);
+        document.getElementById('mensaje').textContent = result.message || 'Error desconocido';
+        if (result.status === 'success') {
+            document.getElementById('inscripcionForm').reset();
         }
     })
     .catch(error => {
         console.error('Error completo:', error);
-        document.getElementById('mensaje').textContent = 'Error: ' + error.message;
+        document.getElementById('mensaje').textContent = 'Error de red o servidor: ' + error.message;
     });
 });
