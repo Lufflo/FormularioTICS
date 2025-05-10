@@ -8,7 +8,7 @@ document.getElementById('inscripcionForm').addEventListener('submit', function(e
         email: formData.get('email')
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbwILD1WEgoAKjZ8Pclfbz8U6UywNcLQqrth6twI7hZ_xg7Am47J1ruotMjszGiOwSnQtA/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbz5UK_mbrlG43ahCEUaHfDEzdUzDFkCeIQTJIp_DBc1-rYFsc3CLVoIpRjQhmHhUh6HVQ/exec', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
